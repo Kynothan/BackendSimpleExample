@@ -20,7 +20,7 @@ namespace Application
             services.AddSingleton<IPlayerRepository, PlayerRepository>(_ => new PlayerRepository(configFile["PathToJson"]));
             services.AddSingleton<IPlayerService, PlayerService>();
             services.AddSingleton<GetPlayerOrderByRankUseCase>();
-            services.AddSingleton<GetPlayerOrderByIdUseCase>();
+            services.AddSingleton<GetPlayerByIdUseCase>();
             services.AddSingleton<IPlayerStatisticsService, PlayerStatisticsService>();
             services.AddSingleton<GetPlayerStatisticsUseCase>();
         }

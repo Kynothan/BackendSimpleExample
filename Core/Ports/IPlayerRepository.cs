@@ -11,6 +11,6 @@ namespace Core.Ports
     public interface IPlayerRepository
     {
         IEnumerable<Player> GetPlayer();
-        Player GetPlayerById(int id);
+        Player? GetPlayerById(int id);
     }
 }

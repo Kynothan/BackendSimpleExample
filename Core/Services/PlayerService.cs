@@ -22,7 +22,7 @@ namespace Core.Services
             return _playerRepository.GetPlayer().OrderBy(x => x.Data.Rank);
         }
 
-        public Player GetPlayerById(int id)
+        public Player? GetPlayerById(int id)
         {
             return _playerRepository.GetPlayerById(id);
         }

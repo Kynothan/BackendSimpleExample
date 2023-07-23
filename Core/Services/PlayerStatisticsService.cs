@@ -17,9 +17,9 @@ namespace Core.Services
             _playerRepository = playerRepository;
         }
 
-        public PlayerStatistics GetPlayerStatistics()
+        public PlayerStatistics GetPlayerStatistics() // je te refait ta methode en plus sexy/ opti mais à part la notion de poids pour l'imc tout est good ! gg je suis fière de toi !
         {
-            var players = _playerRepository.GetPlayer();
+            IEnumerable<Player> players = _playerRepository.GetPlayer(); // on préfère les variable explicite on évite le 'var'
             
             Dictionary<string, int> winsByCountry = new Dictionary<string, int>();
             
@@ -32,7 +32,7 @@ namespace Core.Services
             {
                 int totalWins = player.Data.Last.Count(win => win == 1);
 
-                totalIMC += CalculateIMC(player.Data.Weight, player.Data.Height);
+                totalIMC += CalculateIMC(player.Data.Weight, player.Data.Height); //Attention le poids n'est pas en kg par défault
                 playerHeights.Add(player.Data.Height); // Ajout de la taille du joueur à la liste
 
                 if (winsByCountry.ContainsKey(player.Country.Code))
@@ -56,9 +56,9 @@ namespace Core.Services
 
             return new PlayerStatistics
             {
-                Country = countryWithMostWins,
-                IMC = (int)Math.Round(averageIMC),
-                Mediane = medianHeight
+                CountryWitchHasTheBestRatio = countryWithMostWins,
+                MeanBmiOfThePlayers = (int)Math.Round(averageIMC),
+                MedianHeightOfThePlayers = medianHeight
             };
         }
 
@@ -69,7 +69,7 @@ namespace Core.Services
 
             // Calcul de l'IMC
             return weightInKg / (heightInMeters * heightInMeters);
-        }
+        }   
 
         private int CalculateMedian(List<int> values)
         {
@@ -88,5 +88,28 @@ namespace Core.Services
                 return sortedArray[mid];
             }
         }
+
+        public PlayerStatistics GetPlayerStatisticsVHippo()
+        {
+            IEnumerable<Player> players = _playerRepository.GetPlayer().ToArray();
+
+            return new PlayerStatistics()
+            {
+                MeanBmiOfThePlayers = (int)Math.Round(players.Average(p => p.Imc), MidpointRounding.AwayFromZero),
+                MedianHeightOfThePlayers = (int)Math.Round(players.Count() % 2 == 0
+                    ? players.Select(x => x.Data.Height).OrderBy(x => x).Skip(players.Count() / 2 - 1).Take(2).Average()
+                    : players.Select(x => x.Data.Height).OrderBy(x => x).ElementAt(players.Count() / 2), MidpointRounding.AwayFromZero),
+                CountryWitchHasTheBestRatio = players.GroupBy(p => p.Country.Code).Select(grouping =>
+                {
+                    return new
+                    {
+                        countryRatio = grouping.Sum(p => p.RatioOfPlayer) / grouping.Count(),
+                        country = grouping.Select(g => g.Country).First()
+                    };
+                }).OrderByDescending(o => o.countryRatio).Select(c => c.country).First()
+            };
+
+        }
+        
     }
 }

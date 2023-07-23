@@ -19,9 +19,10 @@ namespace Application.PlayersStatistics.Get
 
         public PlayerStatisticsViewModel Execute()
         {
-            PlayerStatisticsViewModel playerStatisticsViewModel = new PlayerStatisticsViewModel();
-            playerStatisticsViewModel.playerStatistics = _playerStatisticsService.GetPlayerStatistics();
-            return playerStatisticsViewModel;
+            return new PlayerStatisticsViewModel
+            {
+                PlayerStatistics = _playerStatisticsService.GetPlayerStatistics()
+            };;
         }
     }
 }

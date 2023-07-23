@@ -23,7 +23,7 @@ namespace Infrastructure.BDD
             return _players;
         }
 
-        public Player GetPlayerById(int id)
+        public Player? GetPlayerById(int id) // au cas ou il est null ?  Player => Player?
         {
             return _players.FirstOrDefault(player => player.Id == id);
         }

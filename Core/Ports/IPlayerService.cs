@@ -11,6 +11,6 @@ namespace Core.Ports
     {
         public IEnumerable<Player> GetPlayerByRank();
 
-        public Player GetPlayerById(int id);
+        public Player? GetPlayerById(int id);
     }
 }

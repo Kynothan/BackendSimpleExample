@@ -9,6 +9,6 @@ namespace Application.Player.ViewModel
 {
     public class PlayerStatisticsViewModel
     {
-        public Core.Models.PlayerStatistics playerStatistics { get; set; }
+        public Core.Models.PlayerStatistics PlayerStatistics { get; set; }
     }
 }

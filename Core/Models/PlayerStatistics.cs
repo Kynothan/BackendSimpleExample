@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Models
 {
-    public class PlayerStatistics
+    public class PlayerStatistics // on précise plus les variable, médiane oui mais médiane de quoi ?
     {
-        public Country Country { get; set; }
-        public int IMC { get; set; }
-        public int Mediane { get; set; }
+        public Country CountryWitchHasTheBestRatio { get; set; }
+        public int MeanBmiOfThePlayers { get; set; }
+        public int MedianHeightOfThePlayers { get; set; }  
     }
 }

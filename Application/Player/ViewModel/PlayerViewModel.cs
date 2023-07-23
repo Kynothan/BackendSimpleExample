@@ -9,6 +9,6 @@ namespace Application.Player.ViewModel
 {
     public class PlayerViewModel
     {
-        public Core.Models.Player Player { get; set; }
+        public Core.Models.Player? Player { get; set; }
     }
 }

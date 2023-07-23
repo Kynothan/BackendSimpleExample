@@ -17,7 +17,7 @@ namespace Training.Controllers
         }
 
         [HttpGet("{id}")] // Route avec un paramètre id
-        public PlayerViewModel Get([FromServices] GetPlayerOrderByIdUseCase useCase, int id)
+        public PlayerViewModel Get([FromServices] GetPlayerByIdUseCase useCase, int id)
         {
             return useCase.Execute(id);
         }

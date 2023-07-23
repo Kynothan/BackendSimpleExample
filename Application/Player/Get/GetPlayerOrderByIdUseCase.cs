@@ -8,20 +8,21 @@ using System.Threading.Tasks;
 
 namespace Application.Player.Get
 {
-    public class GetPlayerOrderByIdUseCase
+    public class GetPlayerByIdUseCase // Pas vraiment de notion d'order ici 
     {
         private IPlayerService _playerService { get; }
 
-        public GetPlayerOrderByIdUseCase(IPlayerService playerService)
+        public GetPlayerByIdUseCase(IPlayerService playerService)
         {
             _playerService = playerService;
         }
 
         public PlayerViewModel Execute(int id)
         {
-            PlayerViewModel playerViewModel = new PlayerViewModel();
-            playerViewModel.Player = _playerService.GetPlayerById(id);
-            return playerViewModel;
+            return  new PlayerViewModel
+            {
+                Player = _playerService.GetPlayerById(id)
+            };
         }
     }
 }

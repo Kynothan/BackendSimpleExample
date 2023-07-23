@@ -19,9 +19,10 @@ namespace Application.Player.Get
 
         public PlayerListViewModel Execute()
         {
-            PlayerListViewModel playerListViewModel = new PlayerListViewModel();
-            playerListViewModel.Players = _playerService.GetPlayerByRank();
-            return playerListViewModel;
+            return new PlayerListViewModel
+            {
+                Players = _playerService.GetPlayerByRank()
+            };;
         }
     }
 }
